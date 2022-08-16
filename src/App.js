@@ -1,6 +1,9 @@
 import './App.scss';
 import React, {useState, useEffect, Suspense} from 'react';
 import PlaceHolder from './components/placeholder';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+
 const PokemonCard = React.lazy(() => import('./components/pokemon-card/index.js'));
 
 function App() {
@@ -16,6 +19,18 @@ function App() {
   const [pokemonLength, setPokemonLength] = useState(0);
   const [strPrev, setStrPrev] = useState('');
   const [timeOutid, setTimeOutid] = useState(null);
+  const [signedIn, setSignedIn] = useState(false);
+
+
+
+  const responseGoogle = (response) => {
+    if(response.accessToken){
+      setSignedIn(true);
+    }
+  }
+
+  const clientId = "156479564931-i8t3u41sf35kv22b7orbnd8mprlucf1o.apps.googleusercontent.com";
+
 
 
   useEffect(()=>{
@@ -123,6 +138,26 @@ function App() {
     await getList();
     setLoading(false);
   };
+
+    if(!signedIn) {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <h2>Welcome to Pokemon Search</h2>
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+            prompt="select_account"
+            onAutoLoadFinished={true}
+          />
+        </div>
+      </div>
+    );
+  }
 
 
   return (

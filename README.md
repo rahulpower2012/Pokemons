@@ -31,3 +31,8 @@ Developed using of React `<Suspense>` for lazy loading Pokemon card component (N
 Data is fetched as the user scrolls down the page.
 
 Search filter is used to filter using names. If there are less than 6 Pokemons on the screen, more data is feteched until there are 6 or more than 6 pokemons visble or until there are no more Pokemons left to be fetched.
+
+
+### Google Authentication
+
+Uses Google Authentication for authenticating and shwing th Pokemon Listing.
