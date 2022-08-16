@@ -10,8 +10,8 @@ function App() {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
   const [done, setDone] = useState(false);
+  const [load, setLoad] = useState(false);
 
-  const [currPokemonList, setCurrPokemonList] = useState([]);
   const [ searchString, setSearchString ] = useState('');
   const [pokemonLength, setPokemonLength] = useState(0);
   const [strPrev, setStrPrev] = useState('');
@@ -67,13 +67,17 @@ function App() {
     
     setStrPrev(searchString);
     setPokemonLength(PokemonList.length);
-
+    // setLoad(true);
+    // clearTimeout(timeOutid);
 
 
     }, 2000);
 
-    clearTimeout(timeOutid);
-    setTimeOutid(timeOutidNext);
+    // if(load){
+      clearTimeout(timeOutid);
+      setTimeOutid(timeOutidNext);
+    //   setLoad(false);
+    // }
     
   }, [searchString, PokemonList])
 
